@@ -70,12 +70,12 @@
 <body>
 
     <h1>Practice OpenCV.js 2</h1>
-    <p>
+    <!-- <p>
         <button id="start" type="button" disabled>Start</button>
         <button id="stop" type="button" disabled>Stop</button>
         <span id="status">Initializing...</span>
         <span id="error-message"></span>
-    </p>
+    </p> -->
 
     <div class="preview">
         <div>
@@ -107,8 +107,7 @@
 
         // Elements
         const videoElem = document.getElementById('video');
-        const startButtonElem = document.getElementById('start');
-        const stopButtonElem = document.getElementById('stop');
+
         const statusElem = document.getElementById('status');
 
         // https://docs.opencv.org/3.4.0/haarcascade_frontalface_default.xml
@@ -138,13 +137,9 @@
             utils.createFileFromUrl(faceCascadeFile, faceCascadeFile, () => {
                 console.log('Face Cascade File Loaded');
             });
-            // Set Button Events
-            startButtonElem.addEventListener('click', onStart);
-            startButtonElem.disabled = false;
-            stopButtonElem.addEventListener('click', onStop);
-            stopButtonElem.disabled = true;
 
-            statusElem.innerText = 'Ready';
+            onStart();
+
         };
 
         /** On Window Loaded */
@@ -186,19 +181,6 @@
                 });
         }
 
-        /** On Stop */
-        function onStop() {
-            console.log('On Stop');
-
-            videoElem.pause();
-            videoElem.srcObject = null;
-            stream.getVideoTracks()[0].stop();
-
-            isStreaming = false;
-            startButtonElem.disabled = false;
-            stopButtonElem.disabled = true;
-        }
-    
 
 
         /** Process Video */
